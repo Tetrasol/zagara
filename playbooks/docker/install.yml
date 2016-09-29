@@ -17,9 +17,13 @@
       become: true
 
     - name: Add Docker package authentication
+      # NOTE: this needs to be fixed to use a ansible command not a bash command
       #apt_key: keyserver="hkp://p80.pool.sks-keyservers.net:80" id="58118E89F3A912897C070ADBF76221572C52609D" state=present
       command: sh -c "sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
       become_user: root
+
+    - name: Give Default user docker access
+      command: sh -c "sudo usermod -aG docker $USER"
 
     - name: Add current docker entry
       apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' filename='docker.list'
