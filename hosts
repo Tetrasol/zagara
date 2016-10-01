@@ -1,0 +1,5 @@
+[computes]
+OpenStackCompute ansible_host=127.0.0.1 ansible_port=2222 ansible_ssh_private_key_file=.vagrant/machines/OpenStackCompute/virtualbox/private_key
+
+[controllers]
+OpenStackController ansible_host=127.0.0.1 ansible_port=2200 ansible_ssh_private_key_file=.vagrant/machines/OpenStackController/virtualbox/private_key
