@@ -1,56 +1,42 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure(2) do |config|
+Vagrant.configure("2") do |config|
 
-# config.vm.synced_folder
-# config.vm.network
+	config.vm.define 'AnsibleMaster' do |aMaster|
+    aMaster.vm.box = "ubuntu/trusty64"
+		aMaster.vm.box_check_update = false
+    aMaster.vm.network "private_network", ip: "192.168.33.10"
+    aMaster.vm.network "public_network"
+    aMaster.vm.synced_folder ".", "/home/vagrant/workspace"
 
-  config.vm.define 'OpenStackCompute' do |osCompute|
-    osCompute.vm.box = 'ubuntu/trusty64'
-    osCompute.vm.hostname = 'compute'
+		aMaster.vm.provider "virtualbox" do |vb|
+			vb.memory = "1024"
+			vb.cpus = '2'
+		end
+	end
 
-    osCompute.vm.network :private_network, ip: '10.7.20.31', netmask: '255.255.255.0'
+	config.vm.define 'OpenStackCompute' do |computeOS|
+    computeOS.vm.box = "ubuntu/trusty64"
+		computeOS.vm.box_check_update = false
+    computeOS.vm.network "private_network", ip: "192.168.33.10"
+    computeOS.vm.network "public_network"
 
-    osCompute.vm.provider :virtualbox do |vb|
-      vb.name = 'osCompute'
+		computeOS.vm.provider "virtualbox" do |vb|
+			vb.memory = "2048"
+			vb.cpus = '2'
+		end
+	end
 
-      # 'disk id' eq UUID  --resize 'size in megabytes' 16384
-      # vb.customize ['modifyhd', :id, '--resize', '8192']
-      vb.memory = '4096'
-      vb.cpus = '2'
+	config.vm.define 'OpenStackController' do |controllerOS|
+    controllerOS.vm.box = "ubuntu/trusty64"
+		controllerOS.vm.box_check_update = false
+    controllerOS.vm.network "private_network", ip: "192.168.33.10"
+    controllerOS.vm.network "public_network"
 
-      # #
-      # # Run Ansible from the Vagrant Host
-      # #
-      # config.vm.provision "ansible" do |ansible|
-      #   ansible.playbook = "playbook.yml"
-      # end
-    end
-  end
-
-  # OpenStack Controller VM
-  config.vm.define 'OpenStackController' do |osController|
-    osController.vm.box = 'ubuntu/trusty64'
-    osController.vm.hostname = 'controller'
-
-    #osController.vm.network :forwarded_port, guest: 8000, host: 8000
-    osController.vm.network :private_network, ip: '10.7.20.11', netmask: '255.255.255.0'
-
-    osController.vm.provider :virtualbox do |vb|
-      vb.name = 'osController'
-
-      # 'disk id' eq UUID  --resize 'size in megabytes' 16384
-      # vb.customize ['modifyhd', :id, '--resize', '8192']
-      vb.memory = '4096'
-      vb.cpus = '2'
-    end
-
-    # #
-    # # Run Ansible from the Vagrant Host
-    # #
-    # config.vm.provision "ansible" do |ansible|
-    #   ansible.playbook = "playbook.yml"
-    # end
-  end
+		controllerOS.vm.provider "virtualbox" do |vb|
+			vb.memory = "2048"
+			vb.cpus = '2'
+		end
+	end
 end
