@@ -1,6 +1,0 @@
----
-- hosts: keystone
-  tasks:
-    - name: Keystone - create new Database
-      mysql_db: name=keystone state=present
-

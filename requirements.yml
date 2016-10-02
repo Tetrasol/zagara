@@ -1,0 +1,6 @@
+# Role on galaxy
+- geerlingguy.mysql
+- geerlingguy.git
+
+# Public role on github
+- src: https://github.com/gerrive/ansible-role-docker
