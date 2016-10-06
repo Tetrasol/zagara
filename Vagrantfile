@@ -6,8 +6,9 @@ Vagrant.configure("2") do |config|
     aMaster.vm.box = "ubuntu/trusty64"
     aMaster.vm.box_check_update = false
     aMaster.vm.network "private_network", ip: "192.168.33.10"
-    aMaster.vm.network "public_network"
+    aMaster.vm.network "public_network", ip: "192.168.0.120"
     aMaster.vm.synced_folder ".", "/home/vagrant/workspace"
+    aMaster.vm.provision "shell", path: "init.sh"
 
     aMaster.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -19,7 +20,7 @@ Vagrant.configure("2") do |config|
     computeOS.vm.box = "ubuntu/trusty64"
     computeOS.vm.box_check_update = false
     computeOS.vm.network "private_network", ip: "192.168.33.10"
-    computeOS.vm.network "public_network"
+    computeOS.vm.network "public_network", ip: "192.168.0.121"
 
     computeOS.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
@@ -31,7 +32,7 @@ Vagrant.configure("2") do |config|
     controllerOS.vm.box = "ubuntu/trusty64"
     controllerOS.vm.box_check_update = false
     controllerOS.vm.network "private_network", ip: "192.168.33.10"
-    controllerOS.vm.network "public_network"
+    controllerOS.vm.network "public_network", ip: "192.168.0.122"
 
     controllerOS.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
