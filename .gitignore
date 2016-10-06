@@ -1,2 +1,9 @@
+
+### Development
 .vagrant/*
 .vscode/*
+
+
+### Ansible
+roles/*
+
