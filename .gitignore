@@ -1,9 +1,9 @@
-
-### Development
+### Development ###
 .vagrant/*
 .vscode/*
 
+*.swp
 
-### Ansible
+
+### Ansible ###
 roles/*
-

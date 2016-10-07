@@ -2,7 +2,23 @@
 
 Docker Swarm based Openstack Deployment
 
-## Development
+## Resources
+
+### Ansible
+
+[Vagrant Ansible Docs](https://www.vagrantup.com/docs/provisioning/ansible.html)
+[Ansible Docs](http://docs.ansible.com/)
+[Valdhaus.co - Ansible Mac OSX](https://valdhaus.co/writings/ansible-mac-osx/)
+[Ansible Galaxy](https://galaxy.ansible.com)
+[Ansible for DevOps Github](https://github.com/geerlingguy/ansible-for-devops)
+
+### OpenStack
+
+[Openstack](http://openstack.org)
+
+### Docker
+
+[Docker](http://docker.com)
 
 ### Vagrant
 
@@ -21,4 +37,3 @@ Run ansible dependecies: `ansible-galaxy install -r requirements.yml`
 then you can run ansible playbooks:
 
 Run a playbook: `ansible-playbook <task-path>`
-
